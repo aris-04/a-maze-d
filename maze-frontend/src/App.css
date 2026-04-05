@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+body {
+  background-color: #0f172a; 
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px; 
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0; 
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1; 
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.stat-pill {
+  display: inline-block; 
+  background: #1e293b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
+.stat-pill strong {
+  color: #fff;
+}
+
+.leaderboard-btn {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.leaderboard-btn:hover {
+  background: #1e293b;
+  color: #fff;
+}
+
+.maze-board {
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #1e293b;
+}
+
+.maze-row {
+  display: flex;
+}
+
+.cell {
+  width: 20px; 
+  height: 20px; 
+  border-radius: 4px; 
+  margin: 1px;
+  transition: background-color 0.3s ease; 
+  position: relative;
+}
+
+.wall { background-color: #334155; }
+.path { background-color: #0f172a; }
+.fog { background-color: #000; }
+
+.player {
+  background-color: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+  transform: scale(0.7);
+  z-index: 10;
+  transition: all 0.1s ease-in-out; 
+}
+
+.exit {
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+  transform: scale(0.6);
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: scale(0.6) translateY(0); }
+  50% { transform: scale(0.7) translateY(-2px); }
+}
+
+/* Modals */
+.modal-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+.win-modal, .leaderboard-modal {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  border: 1px solid #334155;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  min-width: 300px;
+}
+
+.win-modal h2, .leaderboard-modal h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.name-input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.play-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  flex: 1;
+}
+
+.play-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.play-btn.primary {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.play-btn.primary:hover:not(:disabled) {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+}
+
+.play-btn.secondary {
+  background: #334155;
+  color: #fff;
+}
+
+.play-btn.secondary:hover {
+  background: #475569;
+  transform: translateY(-2px);
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+  text-align: center;
+}
+
+.leaderboard-table th {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

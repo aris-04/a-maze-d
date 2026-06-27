@@ -81,11 +81,22 @@ def get_maze(width: int = 21, height: int = 21) -> Dict[str, Any]:
     h = height if height % 2 != 0 else height + 1
     maze = generate_recursive_backtrack(w, h)
     
+    # 1. Find all available paths (0s) that are reasonably far from the start
+    valid_exits = []
+    for y in range(h):
+        for x in range(w):
+            # Only pick paths in the bottom half OR right half of the maze
+            if maze[y][x] == 0 and (x > w // 2 or y > h // 2):
+                valid_exits.append([y, x])
+                
+    # 2. Pick one of those valid paths completely at random
+    random_exit = random.choice(valid_exits)
+    
     return {
         "maze_id": f"maze_{random.randint(1000, 9999)}",
         "grid": maze,
         "start": [1, 1],
-        "exit": [h - 2, w - 2]
+        "exit": random_exit  # 3. Send the new random exit to the frontend
     }
 
 @app.post("/save-score")
